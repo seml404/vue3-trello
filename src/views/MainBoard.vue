@@ -3,8 +3,7 @@
     <header class="shrink-0 flex justify-between bg-white px-4 py-3">
       <a href="/" class="text-2xl bg-white font-black tracking-tight">trello</a>
       <nav>
-        <a href="#" class="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-500">My boards</a
-        >\
+        <a href="#" class="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-500">My boards</a>
         <button class="ml-3">
           <img
             src="https://avatars.githubusercontent.com/u/77301038?s=400&u=b9ccb9570e2c2b44541f3b395d4f3f47121ea0f8&v=4"
@@ -14,7 +13,18 @@
         </button>
       </nav>
     </header>
-    <main class="flex-1">content</main>
+    <main class="flex-1">
+      <div class="flex flex-col h-full">
+        <div class="shrink-0 flex justify-between items-center p-4">
+          <h1 class="text-2xl text-white font-bold">Board title</h1>
+          <div>
+            <button class="text-white bg-white/10 rounded-md p-2 font-medium hover:bg-white/20">
+              Settings
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
