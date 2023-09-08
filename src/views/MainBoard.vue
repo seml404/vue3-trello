@@ -37,9 +37,9 @@
               <div class="flex items-center justify-between px-3 py-2">
                 <h3 class="text-sm font-semibold text-gray-500">Backlog</h3>
                 <button
-                  class="bg-gray-300 w-8 h-8 text-white bg-slate-500 rounded-md hover:bg-gray-600 grid place-content-center"
+                  class="p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700"
                 >
-                  <EllipsisHorizontalIcon class="h-5 w-5 text-white" />
+                  <EllipsisHorizontalIcon class="h-5 w-5" />
                 </button>
               </div>
               <div class="pb-3 flex flex-col overflow-hidden">
