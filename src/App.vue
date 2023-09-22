@@ -1,8 +1,7 @@
 <template>
-  <!-- <header> -->
-  <!-- <MainBoard></MainBoard> -->
-  <DropDownMenu></DropDownMenu>
-  <!-- </header> -->
+  <header>
+    <MainBoard></MainBoard>
+  </header>
 </template>
 
 <script setup lang="ts">

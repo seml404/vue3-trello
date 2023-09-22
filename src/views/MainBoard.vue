@@ -2,15 +2,40 @@
   <div class="flex flex-col h-screen bg-blue-600">
     <header class="shrink-0 flex justify-between bg-white px-4 py-3">
       <a href="/" class="text-2xl bg-white font-black tracking-tight">trello</a>
-      <nav>
-        <a href="#" class="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-500">My boards</a>
-        <button class="ml-3">
+      <nav class="flex items-center">
+        <a href="#" class="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-500 mr-5"
+          >My boards</a
+        >
+        <DropDownMenu
+          :optsButtonClasses="['z-10']"
+          :menuButtonClasses="[]"
+          :menuItemsClasses="[...menuItmsClassesAvatar]"
+        >
+          <template v-slot:menuBtnIcon>
+            <img
+              src="https://avatars.githubusercontent.com/u/77301038?s=400&u=b9ccb9570e2c2b44541f3b395d4f3f47121ea0f8&v=4"
+              alt="avatar"
+              class="h-9 w-9 inline-block rounded-full"
+            />
+          </template>
+          <template v-slot:menuItems>
+            <MenuItem v-slot="{ active }" v-for="item in optionsAvatar" :key="item.name">
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-500 hover:bg-gray-100"
+                :class="[{ 'hover: bg-gray-100': active }, ...item.classes]"
+                >{{ item.name }}</a
+              ></MenuItem
+            >
+          </template>
+        </DropDownMenu>
+        <!-- <button class="ml-3">
           <img
             src="https://avatars.githubusercontent.com/u/77301038?s=400&u=b9ccb9570e2c2b44541f3b395d4f3f47121ea0f8&v=4"
             alt="avatar"
             class="h-9 w-9 inline-block rounded-full"
           />
-        </button>
+        </button> -->
       </nav>
     </header>
     <main class="flex-1 overflow-hidden pb-4">
@@ -36,11 +61,25 @@
             >
               <div class="flex items-center justify-between px-3 py-2">
                 <h3 class="text-sm font-semibold text-gray-500">Backlog</h3>
-                <button
-                  class="p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700"
+                <DropDownMenu
+                  :optsButtonClasses="['z-10']"
+                  :menuButtonClasses="[...menuBtnClassesCard]"
+                  :menuItemsClasses="[...menuItmsClassesCard]"
                 >
-                  <EllipsisHorizontalIcon class="h-5 w-5" />
-                </button>
+                  <template v-slot:menuBtnIcon>
+                    <EllipsisHorizontalIcon class="h-5 w-5" />
+                  </template>
+                  <template v-slot:menuItems>
+                    <MenuItem v-slot="{ active }" v-for="item in optionsCard" :key="item.name">
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-500 hover:bg-gray-100"
+                        :class="[{ 'hover: bg-gray-100': active }, ...item.classes]"
+                        >{{ item.name }}</a
+                      ></MenuItem
+                    >
+                  </template>
+                </DropDownMenu>
               </div>
               <div class="pb-3 flex flex-col overflow-hidden">
                 <div class="px-3 overflow-y-auto">
@@ -92,6 +131,30 @@ import {
   PencilIcon,
   PlusIcon
 } from '@heroicons/vue/20/solid'
+import { MenuItem } from '@headlessui/vue'
+const menuBtnClassesCard =
+  'focus:outline-none p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700'.split(
+    ' '
+  )
+const menuItmsClassesCard =
+  'absolute bg-white rounded-md shadow-lg border w-48 focus:outline-none mt-2 origin-top-left left-0'.split(
+    ' '
+  )
+
+const menuItmsClassesAvatar =
+  'absolute bg-white rounded-md shadow-lg border w-48 focus:outline-none mt-2 origin-top-right right-0'.split(
+    ' '
+  )
+
+const optionsCard = [
+  { name: 'Edit', classes: [] },
+  { name: 'Delete', classes: ['text-red-600'] }
+]
+
+const optionsAvatar = [
+  { name: 'My profile', classes: [] },
+  { name: 'Log out', classes: [] }
+]
 </script>
 
 <script lang="ts">
