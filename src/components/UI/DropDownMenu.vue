@@ -1,7 +1,7 @@
 <template>
-  <Menu as="div" :class="['relative', ...optsButtonClasses]">
+  <Menu as="div" :class="['relative', optsButtonClasses]">
     <div>
-      <MenuButton :class="['focus:outline-none', ...menuButtonClasses]">
+      <MenuButton :class="['focus:outline-none', menuButtonClasses]">
         {{ menuBtnName || null }}
         <slot name="menuBtnIcon"></slot>
       </MenuButton>
