@@ -1,6 +1,6 @@
 <template>
   <header>
-    <MainBoard></MainBoard>
+    <router-view></router-view>
   </header>
 </template>
 
