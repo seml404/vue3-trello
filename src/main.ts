@@ -12,5 +12,4 @@ app
   .use(router)
   .component('DropDownMenu', drop_down_menu)
   .component('AddBtn', add_btn)
-
 app.mount('#app')
