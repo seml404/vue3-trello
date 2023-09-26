@@ -64,21 +64,17 @@
                   </div>
                 </div>
                 <div class="mt-4">
-                  <button
-                    class="text-black hover:bg-gray-50 rounded-md place-content-center p-1 flex items-center w-full justify-start"
-                  >
-                    <PlusIcon class="h-5 w-5"></PlusIcon>
-                    <span class="ml-1">Add card</span>
-                  </button>
+                  <AddBtn>
+                    <template v-slot:addBtnName>Add card</template>
+                  </AddBtn>
                 </div>
               </div>
               <div class="w-72 flex flex-col rounded-md">
-                <button
-                  class="text-white place-content-center flex items-center w-full justify-start bg-white/10 rounded-md p-2 font-medium hover:bg-white/20"
+                <AddBtn
+                  btnClasses="text-white place-content-center flex items-center w-full justify-start bg-white/10 rounded-md p-2 font-medium hover:bg-white/20"
                 >
-                  <PlusIcon class="h-5 w-5"></PlusIcon>
-                  <span class="ml-1">Add list</span>
-                </button>
+                  <template v-slot:addBtnName>Add list</template>
+                </AddBtn>
               </div>
             </div>
           </div>
