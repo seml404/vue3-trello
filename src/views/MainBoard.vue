@@ -4,7 +4,7 @@
       <main class="flex-1 overflow-hidden pb-20">
         <div class="flex flex-col h-full">
           <div class="shrink-0 flex justify-between items-center p-6">
-            <h1 class="text-2xl text-white font-bold">Board title</h1>
+            <!-- <h1 class="text-2xl text-white font-bold">Board title</h1> -->
             <div>
               <button
                 class="text-white bg-white/10 rounded-md p-2 font-medium hover:bg-white/20 flex justify-center items-center"

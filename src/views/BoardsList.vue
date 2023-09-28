@@ -4,11 +4,6 @@
       <div class="max-w-5xl mx-auto">
         <div class="flex items-center mb-4">
           <h3 class="font-black text-gray-700">My boards</h3>
-          <!-- <div class="ml-4">
-            <AddBtn btnClasses="py-2 px-3 bg-gray-100 rounded font-medium hover:bg-gray-200">
-              <template v-slot:addBtnName>Create board</template>
-            </AddBtn>
-          </div> -->
           <Popover v-slot="{ open }" class="relative">
             <PopoverButton
               :class="open ? 'bg-blue-50 text-blue-600' : ''"
