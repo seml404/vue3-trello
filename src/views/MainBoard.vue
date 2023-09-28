@@ -5,6 +5,7 @@
         <div class="flex flex-col h-full">
           <div class="shrink-0 flex justify-between items-center p-6">
             <!-- <h1 class="text-2xl text-white font-bold">Board title</h1> -->
+            <BoardNameForm :board="currentBoard"></BoardNameForm>
             <div>
               <button
                 class="text-white bg-white/10 rounded-md p-2 font-medium hover:bg-white/20 flex justify-center items-center"
@@ -93,6 +94,7 @@ import {
 } from '@heroicons/vue/20/solid'
 import { MenuItem } from '@headlessui/vue'
 import AuthenticatedLayout from '@/layouts/AuthenaticatedLayout.vue'
+import BoardNameForm from '@/components/BoardNameForm.vue'
 const menuBtnClassesCard =
   'focus:outline-none p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700'
 const menuItmsClassesCard =
@@ -102,6 +104,7 @@ const optionsCard = [
   { name: 'Edit', classes: '' },
   { name: 'Delete', classes: 'text-red-600' }
 ]
+const currentBoard = { name: 'Default board name' }
 </script>
 
 <script lang="ts">
