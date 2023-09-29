@@ -2,9 +2,13 @@
   <header class="shrink-0 flex justify-between bg-white px-4 py-3">
     <a href="/" class="text-2xl bg-white font-black tracking-tight">trello</a>
     <nav class="flex items-center">
-      <a href="#" class="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-500 mr-5"
-        >My boards</a
+      <button
+        class="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-500 mr-5"
+        @click="$router.push('/boards_list')"
       >
+        My boards
+      </button>
+
       <DropDownMenu
         optsButtonClasses="z-10"
         menuButtonClasses=""

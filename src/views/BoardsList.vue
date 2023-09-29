@@ -53,15 +53,25 @@
             </transition>
           </Popover>
         </div>
-        <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <li class="relative bg-blue-600 hover:bg-blue-700 rounded-md min-h-[7rem] list-none">
+            <a
+              href="#"
+              class="text-white text-lg font-bold absolute inset-0 p-2"
+              @click="$router.push('/')"
+              >Main Board</a
+            >
+          </li>
           <li
-            class="relative bg-blue-600 hover:bg-blue-700 rounded-md min-h-[7rem]"
-            v-for="el in 20"
+            class="relative bg-gray-600 rounded-md min-h-[7rem] list-none"
+            v-for="el in 19"
             :key="el"
           >
-            <a href="#" class="text-white text-lg font-bold absolute inset-0 p-2">Board {{ el }}</a>
+            <span class="text-white text-lg font-bold absolute inset-0 p-2"
+              >FakeBoard {{ el }}</span
+            >
           </li>
-        </ul>
+        </div>
       </div>
     </div></AuthenaticatedLayout
   >
