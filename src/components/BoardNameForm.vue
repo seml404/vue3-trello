@@ -1,21 +1,21 @@
 <template>
-  <div class="flex flex-col items-start max-w-full">
+  <div class="flex flex-col items-start max-w-full relative">
     <h1
-      :class="[is_visible ? 'absolute -left-[10000px]' : '']"
-      class="px-3 py-1.5 text-2xl text-white font-bold hover:bg-white/20 cursor-pointer rounded-md break-all"
+      :class="[is_visible ? 'invisible' : '']"
+      class="px-3 py-1.5 text-2xl text-white font-bold hover:bg-white/20 cursor-pointer rounded-md whitespace-pre overflow-hidden text-ellipsis w-full"
       ref="boardHeading"
       @click="handle_edit"
     >
-      {{ newBoard.name }}
+      {{ newBoard.name ? newBoard.name : ' ' }}
     </h1>
-    <form action="" class="w-full" @submit.prevent="handle_blur">
+    <form action="" class="max-w-full" @submit.prevent="handle_blur">
       <input
         v-show="is_visible"
         @blur="handle_blur"
         ref="boardInput"
         v-model="newBoard.name"
         type="text"
-        class="outline-none text-2xl font-bold placeholder-gray-400 px-3 py-1.5 rounded-md focus:outline-2 focus:outline-blue-900 max-w-full"
+        class="outline-none text-2xl font-bold placeholder-gray-400 px-3 py-1.5 rounded-md focus:outline-2 focus:outline-blue-900 w-full absolute inset-0"
       />
     </form>
   </div>
@@ -42,7 +42,7 @@ const handle_blur = () => {
 
 const handle_edit = async () => {
   if (newBoard.value.name === default_name) newBoard.value.name = ''
-  boardInput.value.style.width = `${boardHeading.value.offsetWidth + 15}px`
+  // boardInput.value.style.width = `${boardHeading.value.offsetWidth + 15}px`
   is_visible.value = true
   await nextTick()
   boardInput.value.focus()
@@ -50,8 +50,7 @@ const handle_edit = async () => {
 
 watch(newBoard.value, async () => {
   await nextTick()
-  console.log(boardInput.value.style.width)
 
-  boardInput.value.style.width = `${boardHeading.value.offsetWidth + 15}px`
+  // boardInput.value.style.width = `${boardHeading.value.offsetWidth + 15}px`
 })
 </script>
