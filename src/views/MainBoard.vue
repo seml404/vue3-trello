@@ -64,19 +64,13 @@
                     </ul>
                   </div>
                 </div>
-                <div class="mt-4">
+                <!-- <div class="mt-4">
                   <AddBtn>
                     <template v-slot:addBtnName>Add card</template>
                   </AddBtn>
-                </div>
+                </div>-->
               </div>
-              <div class="w-72 flex flex-col rounded-md">
-                <AddBtn
-                  btnClasses="text-white place-content-center flex items-center w-full justify-start bg-white/10 rounded-md p-2 font-medium hover:bg-white/20"
-                >
-                  <template v-slot:addBtnName>Add list</template>
-                </AddBtn>
-              </div>
+              <CreateListForm :board="currentBoard"></CreateListForm>
             </div>
           </div>
         </div>
@@ -95,6 +89,7 @@ import {
 import { MenuItem } from '@headlessui/vue'
 import AuthenticatedLayout from '@/layouts/AuthenaticatedLayout.vue'
 import BoardNameForm from '@/components/BoardNameForm.vue'
+import CreateListForm from '@/components/CreateListForm.vue'
 const menuBtnClassesCard =
   'focus:outline-none p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700'
 const menuItmsClassesCard =
