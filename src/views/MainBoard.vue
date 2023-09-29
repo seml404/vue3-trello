@@ -3,7 +3,7 @@
     <div class="flex flex-col h-screen bg-blue-600">
       <main class="flex-1 overflow-hidden pb-20">
         <div class="flex flex-col h-full">
-          <div class="shrink-0 flex justify-between items-center p-6">
+          <div class="shrink-0 flex justify-between items-center p-6 flex-wrap">
             <!-- <h1 class="text-2xl text-white font-bold">Board title</h1> -->
             <BoardNameForm :board="currentBoard"></BoardNameForm>
             <div>
