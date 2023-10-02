@@ -17,7 +17,7 @@
         </button>
         <button
           class="px-4 py-2 font-medium font-sm bg-gray-100 text-black rounded-md hover:bg-gray-300"
-          @click="showForm = false"
+          @click.prevent="clearForm"
         >
           Cancel
         </button>
@@ -33,7 +33,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
+import { nextTick, ref, onMounted, onUnmounted } from 'vue'
 import AddBtn from '@/components/UI/AddBtn.vue'
 const props = defineProps({
   board: {
@@ -45,15 +45,34 @@ const emit = defineEmits(['createList'])
 const formInput = ref()
 const newList = ref({ name: '' })
 const showForm = ref(false)
-const handleSubmit = () => {
-  showForm.value = false
-  emit('createList', newList.value)
-}
+
 const handleShowForm = async () => {
   showForm.value = true
   await nextTick()
   formInput.value.focus()
 }
+
+const clearForm = () => {
+  showForm.value = false
+  newList.value.name = ''
+}
+
+const handleEsc = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') clearForm()
+}
+
+const handleSubmit = () => {
+  emit('createList', newList.value)
+  clearForm()
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', handleEsc)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleEsc)
+})
 </script>
 
 <script lang="ts">
