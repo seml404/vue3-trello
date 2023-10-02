@@ -18,7 +18,7 @@
           <div class="flex-1 overflow-x-auto h-full">
             <div class="inline-flex h-full items-start px-4 space-x-4">
               <div
-                v-for="el in Array.from(Array(3))"
+                v-for="el in lists"
                 :key="el"
                 class="w-72 bg-gray-200 flex flex-col rounded-md p-2 max-h-full"
                 draggable="true"
@@ -70,7 +70,7 @@
                   </AddBtn>
                 </div>-->
               </div>
-              <CreateListForm :board="currentBoard"></CreateListForm>
+              <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm>
             </div>
           </div>
         </div>
@@ -86,6 +86,7 @@ import {
   PencilIcon,
   PlusIcon
 } from '@heroicons/vue/20/solid'
+import { ref } from 'vue'
 import { MenuItem } from '@headlessui/vue'
 import AuthenticatedLayout from '@/layouts/AuthenaticatedLayout.vue'
 import BoardNameForm from '@/components/BoardNameForm.vue'
@@ -100,6 +101,14 @@ const optionsCard = [
   { name: 'Delete', classes: 'text-red-600' }
 ]
 const currentBoard = { name: 'Default board name' }
+
+//mock
+
+const lists = ref([1, 2, 3])
+
+const createList = () => {
+  lists.value.push(lists.value[lists.value.length - 1]++)
+}
 </script>
 
 <script lang="ts">
