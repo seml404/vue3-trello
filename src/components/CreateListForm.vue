@@ -2,7 +2,7 @@
   <div class="w-72 flex flex-col rounded-md">
     <form class="p-3 bg-gray-200 rounded-md" v-if="showForm" @submit.prevent="handleSubmit">
       <input
-        v-model="newList.name"
+        v-model="newList.title"
         ref="formInput"
         type="text"
         placeholder="Enter new list name"
@@ -33,17 +33,18 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { UserSpace } from '@/types/index'
+import type { Ref } from 'vue'
 import { nextTick, ref, onMounted, onUnmounted } from 'vue'
 import AddBtn from '@/components/UI/AddBtn.vue'
-const props = defineProps({
-  board: {
-    type: Object,
-    required: true
-  }
-})
+
 const emit = defineEmits(['createList'])
 const formInput = ref()
-const newList = ref({ name: '' })
+const newList: Ref<UserSpace.CardsList> = ref({
+  title: '',
+  id: Date.now(),
+  cards: [{ id: 1, title: 'First Card' }]
+})
 const showForm = ref(false)
 
 const handleShowForm = async () => {
@@ -54,7 +55,7 @@ const handleShowForm = async () => {
 
 const clearForm = () => {
   showForm.value = false
-  newList.value.name = ''
+  newList.value.title = ''
 }
 
 const handleEsc = (e: KeyboardEvent) => {

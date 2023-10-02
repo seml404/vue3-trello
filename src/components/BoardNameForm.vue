@@ -6,14 +6,14 @@
       ref="boardHeading"
       @click="handle_edit"
     >
-      {{ newBoard.name ? newBoard.name : ' ' }}
+      {{ newBoard.title ? newBoard.title : ' ' }}
     </h1>
     <form action="" class="max-w-full" @submit.prevent="handle_blur">
       <input
         v-show="is_visible"
         @blur="handle_blur"
         ref="boardInput"
-        v-model="newBoard.name"
+        v-model="newBoard.title"
         type="text"
         class="outline-none text-2xl font-bold placeholder-gray-400 px-3 py-1.5 rounded-md focus:outline-2 focus:outline-blue-900 w-full absolute inset-0"
       />
@@ -22,11 +22,11 @@
 </template>
 
 <script setup lang="ts">
+import type { UserSpace } from '@/types/index'
 import { ref, watch, onMounted, nextTick } from 'vue'
-const props = defineProps({
-  board: { type: Object, required: true }
-})
-const newBoard = ref({ ...props.board })
+const props = defineProps<{ board: UserSpace.Board }>()
+
+const newBoard = ref({ ...props.board, id: Date.now() })
 const boardHeading = ref()
 const boardInput = ref()
 const default_name = 'New board name'
@@ -35,13 +35,13 @@ const is_visible = ref(false)
 
 const handle_blur = () => {
   is_visible.value = false
-  if (!newBoard.value.name) {
-    newBoard.value.name = default_name
+  if (!newBoard.value.title) {
+    newBoard.value.title = default_name
   }
 }
 
 const handle_edit = async () => {
-  if (newBoard.value.name === default_name) newBoard.value.name = ''
+  if (newBoard.value.title === default_name) newBoard.value.title = ''
   // boardInput.value.style.width = `${boardHeading.value.offsetWidth + 15}px`
   is_visible.value = true
   await nextTick()
