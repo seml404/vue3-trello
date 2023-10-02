@@ -40,12 +40,12 @@ const props = defineProps({
     required: true
   }
 })
-const emit = defineEmits(['createBoard'])
+const emit = defineEmits(['createList'])
 const formInput = ref()
 const showForm = ref(false)
 const handleSubmit = () => {
   showForm.value = false
-  emit('createBoard')
+  emit('createList')
 }
 const handleShowForm = async () => {
   showForm.value = true
