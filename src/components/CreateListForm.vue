@@ -2,6 +2,7 @@
   <div class="w-72 flex flex-col rounded-md">
     <form class="p-3 bg-gray-200 rounded-md" v-if="showForm" @submit.prevent="handleSubmit">
       <input
+        v-model="newList.name"
         ref="formInput"
         type="text"
         placeholder="Enter new list name"
@@ -42,10 +43,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['createList'])
 const formInput = ref()
+const newList = ref({ name: '' })
 const showForm = ref(false)
 const handleSubmit = () => {
   showForm.value = false
-  emit('createList')
+  emit('createList', newList.value)
 }
 const handleShowForm = async () => {
   showForm.value = true

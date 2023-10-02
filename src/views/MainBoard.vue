@@ -19,12 +19,12 @@
             <div class="inline-flex h-full items-start px-4 space-x-4">
               <div
                 v-for="el in lists"
-                :key="el"
+                :key="el.id"
                 class="w-72 bg-gray-200 flex flex-col rounded-md p-2 max-h-full"
                 draggable="true"
               >
                 <div class="flex items-center justify-between px-3 py-2">
-                  <h3 class="text-sm font-semibold text-gray-500">Backlog</h3>
+                  <h3 class="text-sm font-semibold text-gray-500">{{ el.name }}</h3>
                   <DropDownMenu
                     optsButtonClasses="z-10"
                     :menuButtonClasses="menuBtnClassesCard"
@@ -104,10 +104,14 @@ const currentBoard = { name: 'Default board name' }
 
 //mock
 
-const lists = ref([1, 2, 3])
+const lists = ref([
+  { name: 'First list', id: Date.now() },
+  { name: 'Second list', id: Date.now() }
+])
 
-const createList = () => {
-  lists.value.push(lists.value[lists.value.length - 1]++)
+const createList = (newList: { name: string }) => {
+  // lists.value.push(lists.value[lists.value.length - 1]++)
+  lists.value.push({ ...newList, id: Date.now() })
 }
 </script>
 
