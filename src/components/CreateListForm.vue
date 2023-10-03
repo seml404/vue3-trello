@@ -40,13 +40,15 @@ import AddBtn from '@/components/UI/AddBtn.vue'
 const props = defineProps<{ board: UserSpace.Board }>()
 const emit = defineEmits(['createList'])
 const formInput = ref()
-const card_list_id = Date.now()
-const newList: Ref<UserSpace.CardsList> = ref({
-  title: '',
-  id: card_list_id,
-  board_id: props.board.id,
-  cards: [{ id: 1, title: 'First Card', card_list_id: card_list_id }]
-})
+const default_list = () => {
+  return {
+    title: '',
+    id: Date.now(),
+    board_id: props.board.id,
+    cards: []
+  }
+}
+const newList: Ref<UserSpace.CardsList> = ref(default_list())
 const showForm = ref(false)
 
 const handleShowForm = async () => {
@@ -57,7 +59,7 @@ const handleShowForm = async () => {
 
 const clearForm = () => {
   showForm.value = false
-  newList.value.title = ''
+  newList.value = default_list()
 }
 
 const handleEsc = (e: KeyboardEvent) => {

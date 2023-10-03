@@ -39,13 +39,16 @@ import AddBtn from '@/components/UI/AddBtn.vue'
 const emit = defineEmits(['createCard'])
 const textAreaTitle = ref()
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
-const newCard: Ref<UserSpace.Card> = ref({
-  title: '',
-  id: Date.now(),
-  board_id: props.cardsList.board_id,
-  card_list_id: props.cardsList.id,
-  classes: ''
-})
+const default_card = () => {
+  return {
+    title: '',
+    id: Date.now(),
+    board_id: props.cardsList.board_id,
+    card_list_id: props.cardsList.id,
+    classes: ''
+  }
+}
+const newCard: Ref<UserSpace.Card> = ref(default_card())
 
 const showForm = ref(false)
 
@@ -57,7 +60,7 @@ const handleShowForm = async () => {
 
 const clearForm = () => {
   showForm.value = false
-  newCard.value.title = ''
+  newCard.value = default_card()
 }
 
 const handleEsc = (e: KeyboardEvent) => {

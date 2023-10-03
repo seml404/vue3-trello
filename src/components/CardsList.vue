@@ -60,7 +60,6 @@ import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { MenuItem } from '@headlessui/vue'
 import type { UserSpace } from '@/types/index'
-import { User } from '../../../frontend/src/modules/user/types'
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
 const currentList: Ref<UserSpace.CardsList> = ref({ ...props.cardsList })
 const menuBtnClassesCard =

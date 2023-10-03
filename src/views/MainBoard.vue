@@ -64,6 +64,7 @@ const lists = ref([
 
 const createList = (newCardsList: UserSpace.CardsList) => {
   cardsLists.value.push(newCardsList)
+  console.log(cardsLists.value)
 }
 </script>
 
