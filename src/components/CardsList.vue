@@ -41,11 +41,15 @@
         </ul>
       </div>
     </div>
+    <div class="mt-4">
+      <CreateCardForm :cardsList="cardsList" @createCard="createCard"></CreateCardForm>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import DropDownMenu from '@/components/UI/DropDownMenu.vue'
+import CreateCardForm from '@/components/CreateCardForm.vue'
 import {
   AdjustmentsHorizontalIcon,
   EllipsisHorizontalIcon,
@@ -53,9 +57,12 @@ import {
   PlusIcon
 } from '@heroicons/vue/20/solid'
 import { ref } from 'vue'
+import type { Ref } from 'vue'
 import { MenuItem } from '@headlessui/vue'
 import type { UserSpace } from '@/types/index'
+import { User } from '../../../frontend/src/modules/user/types'
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
+const currentList: Ref<UserSpace.CardsList> = ref({ ...props.cardsList })
 const menuBtnClassesCard =
   'focus:outline-none p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700'
 const menuItmsClassesCard =
@@ -65,6 +72,10 @@ const optionsCard = [
   { name: 'Edit', classes: '' },
   { name: 'Delete', classes: 'text-red-600' }
 ]
+
+const createCard = (card: UserSpace.Card) => {
+  currentList.value.cards.push(card)
+}
 </script>
 
 <script lang="ts">

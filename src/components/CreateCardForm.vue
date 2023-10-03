@@ -1,19 +1,21 @@
 <template>
-  <div class="w-72 flex flex-col rounded-md">
-    <form class="p-3 bg-gray-200 rounded-md" v-if="showForm" @submit.prevent="handleSubmit">
-      <input
-        v-model="newList.title"
-        ref="formInput"
-        type="text"
-        placeholder="Enter new list name"
+  <div class="w-full1 flex flex-col rounded-md">
+    <form v-if="showForm" @submit.prevent="handleSubmit">
+      <textarea
+        v-model="newCard.title"
+        rows="3"
+        ref="textAreaTitle"
+        placeholder="Enter card title"
         class="p-3 inline-block w-full text-sm rounded-md border shadow-sm border-gray-100 focus:outline-blue-400 focus:border-blue-400"
+        @keydown.enter.prevent="handleSubmit"
       />
       <div class="mt-2 space-x-2">
         <button
           @click="handleSubmit"
+          :disabled="!newCard.title"
           class="mr-2 px-4 py-2 font-medium font-sm text-white bg-rose-600 hover:bg-rose-500 rounded-md shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-rose-500"
         >
-          Add new list
+          Add new card
         </button>
         <button
           class="px-4 py-2 font-medium font-sm bg-gray-100 text-black rounded-md hover:bg-gray-300"
@@ -23,12 +25,8 @@
         </button>
       </div>
     </form>
-    <AddBtn
-      @click="handleShowForm"
-      v-else
-      btnClasses="text-white place-content-center flex items-center w-full justify-start bg-white/10 rounded-md p-2 font-medium hover:bg-white/20"
-    >
-      <template v-slot:addBtnName>Add list</template>
+    <AddBtn @click="handleShowForm" v-else>
+      <template v-slot:addBtnName>Add card</template>
     </AddBtn>
   </div>
 </template>
@@ -37,27 +35,29 @@ import type { UserSpace } from '@/types/index'
 import type { Ref } from 'vue'
 import { nextTick, ref, onMounted, onUnmounted } from 'vue'
 import AddBtn from '@/components/UI/AddBtn.vue'
-const props = defineProps<{ board: UserSpace.Board }>()
-const emit = defineEmits(['createList'])
-const formInput = ref()
-const card_list_id = Date.now()
-const newList: Ref<UserSpace.CardsList> = ref({
+
+const emit = defineEmits(['createCard'])
+const textAreaTitle = ref()
+const props = defineProps<{ cardsList: UserSpace.CardsList }>()
+const newCard: Ref<UserSpace.Card> = ref({
   title: '',
-  id: card_list_id,
-  board_id: props.board.id,
-  cards: [{ id: 1, title: 'First Card', card_list_id: card_list_id }]
+  id: Date.now(),
+  board_id: props.cardsList.board_id,
+  card_list_id: props.cardsList.id,
+  classes: ''
 })
+
 const showForm = ref(false)
 
 const handleShowForm = async () => {
   showForm.value = true
   await nextTick()
-  formInput.value.focus()
+  textAreaTitle.value.focus()
 }
 
 const clearForm = () => {
   showForm.value = false
-  newList.value.title = ''
+  newCard.value.title = ''
 }
 
 const handleEsc = (e: KeyboardEvent) => {
@@ -65,7 +65,7 @@ const handleEsc = (e: KeyboardEvent) => {
 }
 
 const handleSubmit = () => {
-  emit('createList', { ...newList.value })
+  emit('createCard', { ...newCard.value })
   clearForm()
 }
 
@@ -80,6 +80,6 @@ onUnmounted(() => {
 
 <script lang="ts">
 export default {
-  name: 'CreateListForm'
+  name: 'CreateCardForm'
 }
 </script>

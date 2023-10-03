@@ -42,17 +42,18 @@ const currentBoard: UserSpace.Board = { title: 'Default board name', id: Date.no
 const cardsLists: Ref<UserSpace.CardsList[]> = ref([
   {
     id: 1,
+    board_id: currentBoard.id,
     title: 'FirstList',
     cards: [
-      { id: 1, title: 'First Card' },
-      { id: 2, title: 'Second Card' },
-      { id: 3, title: 'Third Card' },
-      { id: 4, title: 'Fourth Card' },
-      { id: 5, title: 'Fifth Card' },
-      { id: 6, title: 'Sixth Card' },
-      { id: 7, title: 'Seventh Card' },
-      { id: 8, title: 'Eights Card' },
-      { id: 9, title: 'Ninth Card' }
+      { id: 1, title: 'First Card', card_list_id: 1 },
+      { id: 2, title: 'Second Card', card_list_id: 1 },
+      { id: 3, title: 'Third Card', card_list_id: 1 },
+      { id: 4, title: 'Fourth Card', card_list_id: 1 },
+      { id: 5, title: 'Fifth Card', card_list_id: 1 },
+      { id: 6, title: 'Sixth Card', card_list_id: 1 },
+      { id: 7, title: 'Seventh Card', card_list_id: 1 },
+      { id: 8, title: 'Eights Card', card_list_id: 1 },
+      { id: 9, title: 'Ninth Card', card_list_id: 1 }
     ]
   }
 ])
@@ -62,7 +63,7 @@ const lists = ref([
 ])
 
 const createList = (newCardsList: UserSpace.CardsList) => {
-  cardsLists.value.push({ ...newCardsList })
+  cardsLists.value.push(newCardsList)
 }
 </script>
 
