@@ -25,19 +25,7 @@
     <div class="pb-3 flex flex-col overflow-hidden">
       <div class="px-3 overflow-y-auto">
         <ul class="space-y-3">
-          <li
-            class="bg-white shadow rounded-md border-b border-gray-300 hover:bg-gray-50 hover:cursor-pointer relative p-4 group"
-            draggable="true"
-            v-for="card in cardsList.cards"
-            :key="card.id"
-          >
-            <a href="" class="">{{ card.title }}</a>
-            <button
-              class="text-gray-300 hover:text-black absolute top-1 right-1 bg-gray-50 rounded-md place-content-center hover:bg-gray-300 p-1 hidden group-hover:grid"
-            >
-              <PencilIcon class="h-5 w-5"></PencilIcon>
-            </button>
-          </li>
+          <CardItem v-for="card in cardsList.cards" :key="card.id" :card="card"></CardItem>
         </ul>
       </div>
     </div>
@@ -50,6 +38,7 @@
 <script setup lang="ts">
 import DropDownMenu from '@/components/UI/DropDownMenu.vue'
 import CreateCardForm from '@/components/CreateCardForm.vue'
+import CardItem from '@/components/CardItem.vue'
 import {
   AdjustmentsHorizontalIcon,
   EllipsisHorizontalIcon,
