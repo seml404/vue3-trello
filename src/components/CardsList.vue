@@ -25,7 +25,14 @@
     <div class="pb-3 flex flex-col overflow-hidden">
       <div class="px-3 overflow-y-auto">
         <ul class="space-y-3">
-          <CardItem v-for="card in cardsList.cards" :key="card.id" :card="card"></CardItem>
+          <CardItem
+            v-for="card in cardsList.cards"
+            :key="card.id"
+            class="bg-white shadow rounded-md border-b border-gray-300 hover:bg-gray-50 hover:cursor-pointer relative p-4 group"
+            draggable="true"
+            :card="card"
+            @changeCard="changeCard"
+          ></CardItem>
         </ul>
       </div>
     </div>
@@ -42,7 +49,6 @@ import CardItem from '@/components/CardItem.vue'
 import {
   AdjustmentsHorizontalIcon,
   EllipsisHorizontalIcon,
-  PencilIcon,
   PlusIcon
 } from '@heroicons/vue/20/solid'
 import { ref } from 'vue'
@@ -63,6 +69,11 @@ const optionsCard = [
 
 const createCard = (card: UserSpace.Card) => {
   currentList.value.cards.push(card)
+}
+
+const changeCard = (editedItem: UserSpace.Card) => {
+  const editedCard = currentList.value.cards.find((card) => card.id === editedItem.id)
+  if (editedCard) editedCard.title = editedItem.title
 }
 </script>
 
