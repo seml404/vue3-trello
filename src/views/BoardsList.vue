@@ -58,7 +58,7 @@
             <a
               href="#"
               class="text-white text-lg font-bold absolute inset-0 p-2"
-              @click="$router.push('/')"
+              @click="$router.push('/main_board')"
               >Main Board</a
             >
           </li>

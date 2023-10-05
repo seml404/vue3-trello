@@ -16,4 +16,8 @@ export namespace UserSpace {
     card_list_id: number
     classes?: string
   }
+  export enum Path {
+    HOME = 'home',
+    MAIN_BOARD = 'main_board'
+  }
 }

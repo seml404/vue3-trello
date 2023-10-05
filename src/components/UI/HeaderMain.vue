@@ -4,7 +4,7 @@
     <nav class="flex items-center">
       <button
         class="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-500 mr-5"
-        @click="$router.push('/boards_list')"
+        @click="$router.push('/')"
       >
         My boards
       </button>

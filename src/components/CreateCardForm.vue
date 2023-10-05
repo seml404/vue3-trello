@@ -33,11 +33,13 @@
 <script setup lang="ts">
 import type { UserSpace } from '@/types/index'
 import type { Ref } from 'vue'
-import { nextTick, ref, onMounted, onUnmounted } from 'vue'
+import { nextTick, ref, onMounted, onUnmounted, computed } from 'vue'
 import AddBtn from '@/components/UI/AddBtn.vue'
+import { useUserSpaceStore } from '@/store'
 
 const emit = defineEmits(['createCard'])
 const textAreaTitle = ref()
+const store = useUserSpaceStore()
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
 const default_card = () => {
   return {
@@ -50,16 +52,19 @@ const default_card = () => {
 }
 const newCard: Ref<UserSpace.Card> = ref(default_card())
 
-const showForm = ref(false)
+// const showForm = ref(false)
+const showForm = computed(() => {
+  return newCard.value.id === store.cardAddStatus.value
+})
 
 const handleShowForm = async () => {
-  showForm.value = true
+  store.setCardAdd(newCard.value.id)
   await nextTick()
   textAreaTitle.value.focus()
 }
 
 const clearForm = () => {
-  showForm.value = false
+  store.setCardAdd(null)
   newCard.value = default_card()
 }
 

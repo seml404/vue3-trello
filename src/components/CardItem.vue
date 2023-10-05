@@ -43,24 +43,31 @@
 import type { UserSpace } from '@/types/index'
 import { PencilIcon } from '@heroicons/vue/20/solid'
 import type { Ref } from 'vue'
-import { nextTick, ref, onMounted, onUnmounted, computed } from 'vue'
+import { nextTick, ref, onMounted, onUnmounted, computed, watch } from 'vue'
+import { useUserSpaceStore } from '@/store'
 const props = defineProps<{ card: UserSpace.Card }>()
-
+const store = useUserSpaceStore()
 const emit = defineEmits(['changeCard'])
 const textAreaTitle = ref()
 
 const editableCard: Ref<UserSpace.Card> = ref({ ...props.card })
 
-const showForm = ref(false)
+// const showForm = ref(false)
+
+const showForm = computed(() => {
+  return store.cardEditStatus.value === props.card.id
+})
 
 const handleShowForm = async () => {
-  showForm.value = true
+  if (store.cardEditStatus) {
+    store.setCardEdit(props.card.id)
+  }
   await nextTick()
   textAreaTitle.value.focus()
 }
 
 const clearForm = () => {
-  showForm.value = false
+  store.setCardEdit(null)
   editableCard.value = { ...props.card }
 }
 
@@ -70,7 +77,7 @@ const handleEsc = (e: KeyboardEvent) => {
 
 const handleSubmit = () => {
   emit('changeCard', { ...editableCard.value })
-  showForm.value = false
+  store.setCardEdit(null)
 }
 
 onMounted(() => {
