@@ -11,7 +11,8 @@
       <div class="mt-2 space-x-2">
         <button
           @click="handleSubmit"
-          class="mr-2 px-4 py-2 font-medium font-sm text-white bg-rose-600 hover:bg-rose-500 rounded-md shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-rose-500"
+          :disabled="!newList.title"
+          class="mr-2 px-4 py-2 font-medium font-sm text-white bg-rose-600 hover:bg-rose-500 rounded-md shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-rose-500 disabled:bg-gray-300"
         >
           Add new list
         </button>
