@@ -98,3 +98,12 @@ export default {
   name: 'CardItem'
 }
 </script>
+
+<style lang="scss" scoped>
+.drag {
+  background-color: yellow;
+}
+.ghost {
+  background-color: red;
+}
+</style>

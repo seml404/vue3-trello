@@ -1,5 +1,5 @@
 <template>
-  <div class="w-72 bg-gray-200 flex flex-col rounded-md p-2 max-h-full" draggable="true">
+  <div class="w-72 bg-gray-200 flex flex-col rounded-md p-2 max-h-full">
     <div class="flex items-center justify-between px-3 py-2">
       <h3 class="text-sm font-semibold text-gray-500">{{ cardsList.title }}</h3>
       <DropDownMenu
@@ -24,7 +24,14 @@
     </div>
     <div class="pb-3 flex flex-col overflow-hidden">
       <div class="px-3 overflow-y-auto">
-        <draggable v-model="cards" group="cards" class="space-y-3"
+        <draggable
+          v-model="cards"
+          group="cards"
+          class="space-y-3"
+          tag="ul"
+          itemKey="id"
+          drag-class="drag"
+          ghost-class="ghost"
           ><template #item="{ element }">
             <CardItem
               class="bg-white shadow rounded-md border-b border-gray-300 hover:bg-gray-50 hover:cursor-pointer relative p-4 group"
