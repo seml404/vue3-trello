@@ -24,7 +24,16 @@
     </div>
     <div class="pb-3 flex flex-col overflow-hidden">
       <div class="px-3 overflow-y-auto">
-        <ul class="space-y-3">
+        <draggable v-model="cards" group="cards" class="space-y-3"
+          ><template #item="{ element }">
+            <CardItem
+              class="bg-white shadow rounded-md border-b border-gray-300 hover:bg-gray-50 hover:cursor-pointer relative p-4 group"
+              :card="element"
+              @changeCard="changeCard"
+            ></CardItem>
+          </template>
+        </draggable>
+        <!-- <ul class="space-y-3">
           <CardItem
             v-for="card in cardsList.cards"
             :key="card.id"
@@ -33,7 +42,7 @@
             :card="card"
             @changeCard="changeCard"
           ></CardItem>
-        </ul>
+        </ul> -->
       </div>
     </div>
     <div class="mt-4">
@@ -55,8 +64,10 @@ import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { MenuItem } from '@headlessui/vue'
 import type { UserSpace } from '@/types/index'
+import draggable from 'vuedraggable'
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
 const currentList: Ref<UserSpace.CardsList> = ref({ ...props.cardsList })
+const cards: Ref<UserSpace.Card[]> = ref([...currentList.value.cards])
 const menuBtnClassesCard =
   'focus:outline-none p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700'
 const menuItmsClassesCard =
