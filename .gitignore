@@ -27,5 +27,8 @@ coverage
 *.sln
 *.sw?
 
+#env
+.env
+
 #temp file
 todo.md
