@@ -25,7 +25,7 @@
     <div class="pb-3 flex flex-col overflow-hidden">
       <div class="px-3 overflow-y-auto">
         <draggable
-          v-model="cards"
+          v-model="currentList.cards"
           group="cards"
           class="space-y-3"
           tag="ul"
@@ -73,7 +73,7 @@ import type { UserSpace } from '@/types/index'
 import draggable from 'vuedraggable'
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
 const currentList: Ref<UserSpace.CardsList> = ref({ ...props.cardsList })
-const cards: Ref<UserSpace.Card[]> = ref([...currentList.value.cards])
+// const cards: Ref<UserSpace.Card[]> = ref([...currentList.value.cards])
 const menuBtnClassesCard =
   'focus:outline-none p-1 text-gray-500 bg-white/50 rounded-md hover:bg-white/100 grid place-content-center hover:text-gray-700'
 const menuItmsClassesCard =
@@ -94,7 +94,7 @@ const changeCard = (editedItem: UserSpace.Card) => {
 }
 
 const updateSortIdx = () => {
-  const updatedIdxes = cards.value.map((el: UserSpace.Card, idx: number) => {
+  const updatedIdxes = currentList.value.cards.map((el: UserSpace.Card, idx: number) => {
     return { id: el.id, sort_idx: idx }
   })
   console.log(updatedIdxes)
@@ -104,15 +104,6 @@ const handleChange = (event: Event) => {
   console.log(event)
   updateSortIdx()
 }
-watch(
-  currentList.value.cards,
-  () => {
-    cards.value = [...currentList.value.cards]
-  },
-  {
-    immediate: true
-  }
-)
 </script>
 
 <script lang="ts">
