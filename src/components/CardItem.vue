@@ -1,16 +1,18 @@
 <template>
-  <li>
-    <div v-if="!showForm">
-      <a href="" class="">{{ card.title }}</a>
-      <button
-        @click="handleShowForm"
-        class="text-gray-300 hover:text-black absolute top-1 right-1 bg-gray-50 rounded-md place-content-center hover:bg-gray-300 p-1 hidden group-hover:grid"
-      >
-        <PencilIcon class="h-5 w-5"></PencilIcon>
-      </button>
-    </div>
-    <template v-else>
-      <form @submit.prevent="handleSubmit">
+  <li
+    class="group relative bg-white p-4 shadow rounded-md border-b border-gray-300 hover:bg-gray-50 hover:cursor-pointer"
+  >
+    <div>
+      <template v-if="!showForm">
+        <a href="" class="">{{ card.title }}</a>
+        <button
+          @click="handleShowForm"
+          class="text-gray-300 hover:text-black absolute top-1 right-1 bg-gray-50 rounded-md place-content-center hover:bg-gray-300 p-1 hidden group-hover:grid"
+        >
+          <PencilIcon class="h-5 w-5"></PencilIcon>
+        </button>
+      </template>
+      <form @submit.prevent="handleSubmit" v-else>
         <textarea
           v-model="editableCard.title"
           rows="3"
@@ -35,7 +37,7 @@
           </button>
         </div>
       </form>
-    </template>
+    </div>
   </li>
 </template>
 
@@ -100,10 +102,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.drag {
-  background-color: yellow;
-}
 .ghost {
-  background-color: red;
+  background-color: lightgrey;
+}
+.ghost > div {
+  visibility: hidden;
 }
 </style>

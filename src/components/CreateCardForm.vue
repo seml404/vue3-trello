@@ -47,7 +47,8 @@ const default_card = () => {
     id: Date.now(),
     board_id: props.cardsList.board_id,
     card_list_id: props.cardsList.id,
-    classes: ''
+    classes: '',
+    sort_idx: 0
   }
 }
 const newCard: Ref<UserSpace.Card> = ref(default_card())

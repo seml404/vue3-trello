@@ -32,12 +32,11 @@
           itemKey="id"
           drag-class="drag"
           ghost-class="ghost"
-          ><template #item="{ element }">
-            <CardItem
-              class="bg-white shadow rounded-md border-b border-gray-300 hover:bg-gray-50 hover:cursor-pointer relative p-4 group"
-              :card="element"
-              @changeCard="changeCard"
-            ></CardItem>
+          animation="200"
+          @change="handleChange"
+        >
+          <template #item="{ element }">
+            <CardItem :card="element" @changeCard="changeCard"></CardItem>
           </template>
         </draggable>
         <!-- <ul class="space-y-3">
@@ -67,7 +66,7 @@ import {
   EllipsisHorizontalIcon,
   PlusIcon
 } from '@heroicons/vue/20/solid'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { Ref } from 'vue'
 import { MenuItem } from '@headlessui/vue'
 import type { UserSpace } from '@/types/index'
@@ -86,13 +85,34 @@ const optionsCard = [
 ]
 
 const createCard = (card: UserSpace.Card) => {
-  currentList.value.cards.push(card)
+  currentList.value.cards.push({ ...card, sort_idx: currentList.value.cards.length + 1 })
 }
 
 const changeCard = (editedItem: UserSpace.Card) => {
   const editedCard = currentList.value.cards.find((card) => card.id === editedItem.id)
   if (editedCard) editedCard.title = editedItem.title
 }
+
+const updateSortIdx = () => {
+  const updatedIdxes = cards.value.map((el: UserSpace.Card, idx: number) => {
+    return { id: el.id, sort_idx: idx }
+  })
+  console.log(updatedIdxes)
+}
+
+const handleChange = (event: Event) => {
+  console.log(event)
+  updateSortIdx()
+}
+watch(
+  currentList.value.cards,
+  () => {
+    cards.value = [...currentList.value.cards]
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <script lang="ts">
@@ -100,3 +120,5 @@ export default {
   name: 'CardsList'
 }
 </script>
+
+<style scoped></style>

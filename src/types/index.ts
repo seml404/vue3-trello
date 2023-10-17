@@ -18,6 +18,7 @@ export namespace UserSpace {
     id: number
     card_list_id: number
     classes?: string
+    sort_idx: number
   }
   export enum Path {
     HOME = 'home',
