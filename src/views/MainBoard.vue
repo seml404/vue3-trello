@@ -16,6 +16,21 @@
           </div>
           <div class="flex-1 overflow-x-auto h-full">
             <div class="inline-flex h-full items-start px-4 space-x-4">
+              <!-- <Draggable
+                v-model="cardsLists"
+                group="cardsLists"
+                class="space-y-3"
+                itemKey="id"
+                drag-class="drag"
+                ghost-class="ghost"
+                animation="200"
+                @change="handleChange"
+              >
+                <template #item="{ element }">
+                  <CardsList :cardsList="element"></CardsList>
+                </template>
+              </Draggable>
+              <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm> -->
               <CardsList v-for="list in cardsLists" :key="list.id" :cardsList="list"></CardsList>
               <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm>
             </div>
@@ -65,6 +80,10 @@ const lists = ref([
 const createList = (newCardsList: UserSpace.CardsList) => {
   cardsLists.value.push(newCardsList)
   console.log(cardsLists.value)
+}
+
+const handleChange = (e: Event) => {
+  console.log(e)
 }
 </script>
 

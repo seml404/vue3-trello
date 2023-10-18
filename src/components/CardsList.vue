@@ -65,6 +65,11 @@ import { ref, watch } from 'vue'
 import type { Ref } from 'vue'
 import { MenuItem } from '@headlessui/vue'
 import type { UserSpace } from '@/types/index'
+import {
+  AdjustmentsHorizontalIcon,
+  EllipsisHorizontalIcon,
+  PlusIcon
+} from '@heroicons/vue/20/solid'
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
 const currentList: Ref<UserSpace.CardsList> = ref({ ...props.cardsList })
 // const cards: Ref<UserSpace.Card[]> = ref([...currentList.value.cards])
