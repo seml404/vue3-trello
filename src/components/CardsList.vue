@@ -1,7 +1,8 @@
 <template>
   <div class="w-72 bg-gray-200 flex flex-col rounded-md p-2 max-h-full">
     <div class="flex items-center justify-between px-3 py-2">
-      <h3 class="text-sm font-semibold text-gray-500">{{ cardsList.title }}</h3>
+      <!-- <h3 class="text-sm font-semibold text-gray-500">{{ cardsList.title }}</h3> -->
+      <EditNameForm :item="currentList" />
       <DropDownMenu
         optsButtonClasses="z-10"
         :menuButtonClasses="menuBtnClassesCard"
@@ -39,16 +40,6 @@
             <CardItem :card="element" @changeCard="changeCard"></CardItem>
           </template>
         </Draggable>
-        <!-- <ul class="space-y-3">
-          <CardItem
-            v-for="card in cardsList.cards"
-            :key="card.id"
-            class="bg-white shadow rounded-md border-b border-gray-300 hover:bg-gray-50 hover:cursor-pointer relative p-4 group"
-            draggable="true"
-            :card="card"
-            @changeCard="changeCard"
-          ></CardItem>
-        </ul> -->
       </div>
     </div>
     <div class="mt-4">
@@ -70,6 +61,7 @@ import {
   EllipsisHorizontalIcon,
   PlusIcon
 } from '@heroicons/vue/20/solid'
+import EditNameForm from '@/components/UI/EditNameForm.vue'
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
 const currentList: Ref<UserSpace.CardsList> = ref({ ...props.cardsList })
 // const cards: Ref<UserSpace.Card[]> = ref([...currentList.value.cards])

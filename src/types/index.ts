@@ -3,6 +3,7 @@ export namespace UserSpace {
     [key: string]: unknown
     id: number
     title: string
+    card_lists: CardsList[]
   }
   export interface CardsList {
     [key: string]: unknown

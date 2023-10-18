@@ -4,7 +4,7 @@
       <main class="flex-1 overflow-hidden pb-20">
         <div class="flex flex-col h-full">
           <div class="shrink-0 flex justify-between items-center p-6 flex-wrap">
-            <BoardNameForm :board="currentBoard"></BoardNameForm>
+            <EditNameForm :item="currentBoard" />
             <div>
               <button
                 class="text-white bg-white/10 rounded-md p-2 font-medium hover:bg-white/20 flex justify-center items-center"
@@ -17,8 +17,8 @@
           <div class="flex-1 overflow-x-auto h-full">
             <div class="inline-flex h-full items-start px-4 space-x-4">
               <Draggable
-                v-model="cardsLists"
-                group="cardsLists"
+                v-model="currentBoard.card_lists"
+                group="currentBoard.card_lists"
                 class="space-x-4 horizontal"
                 itemKey="id"
                 drag-class="drag"
@@ -31,8 +31,6 @@
                 </template>
               </Draggable>
               <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm>
-              <!-- <CardsList v-for="list in cardsLists" :key="list.id" :cardsList="list"></CardsList>
-              <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm> -->
             </div>
           </div>
         </div>
@@ -50,36 +48,40 @@ import AuthenticatedLayout from '@/layouts/AuthenaticatedLayout.vue'
 import BoardNameForm from '@/components/BoardNameForm.vue'
 import CreateListForm from '@/components/CreateListForm.vue'
 import CardsList from '@/components/CardsList.vue'
+import EditNameForm from '@/components/UI/EditNameForm.vue'
+const id: number = Date.now()
 
-const currentBoard: UserSpace.Board = { title: 'Default board name', id: Date.now() }
+const currentBoard: Ref<UserSpace.Board> = ref({
+  title: 'Default board name',
+  id: id,
+  card_lists: [
+    {
+      id: 1,
+      board_id: id,
+      title: 'FirstList',
+      cards: [
+        { id: 1, title: 'First Card', card_list_id: 1 },
+        { id: 2, title: 'Second Card', card_list_id: 1 },
+        { id: 3, title: 'Third Card', card_list_id: 1 },
+        { id: 4, title: 'Fourth Card', card_list_id: 1 },
+        { id: 5, title: 'Fifth Card', card_list_id: 1 },
+        { id: 6, title: 'Sixth Card', card_list_id: 1 },
+        { id: 7, title: 'Seventh Card', card_list_id: 1 },
+        { id: 8, title: 'Eights Card', card_list_id: 1 },
+        { id: 9, title: 'Ninth Card', card_list_id: 1 }
+      ]
+    }
+  ]
+})
 
 //mock
-const cardsLists: Ref<UserSpace.CardsList[]> = ref([
-  {
-    id: 1,
-    board_id: currentBoard.id,
-    title: 'FirstList',
-    cards: [
-      { id: 1, title: 'First Card', card_list_id: 1 },
-      { id: 2, title: 'Second Card', card_list_id: 1 },
-      { id: 3, title: 'Third Card', card_list_id: 1 },
-      { id: 4, title: 'Fourth Card', card_list_id: 1 },
-      { id: 5, title: 'Fifth Card', card_list_id: 1 },
-      { id: 6, title: 'Sixth Card', card_list_id: 1 },
-      { id: 7, title: 'Seventh Card', card_list_id: 1 },
-      { id: 8, title: 'Eights Card', card_list_id: 1 },
-      { id: 9, title: 'Ninth Card', card_list_id: 1 }
-    ]
-  }
-])
 const lists = ref([
   { name: 'First list', id: Date.now() },
   { name: 'Second list', id: Date.now() }
 ])
 
 const createList = (newCardsList: UserSpace.CardsList) => {
-  cardsLists.value.push(newCardsList)
-  console.log(cardsLists.value)
+  currentBoard.value.card_lists.push(newCardsList)
 }
 
 const handleChange = (e: Event) => {
@@ -98,7 +100,6 @@ export default {
   display: flex;
   flex-grow: 0;
   flex-shrink: 0;
-
   align-items: flex-start;
 }
 </style>
