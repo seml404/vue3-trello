@@ -16,10 +16,10 @@
           </div>
           <div class="flex-1 overflow-x-auto h-full">
             <div class="inline-flex h-full items-start px-4 space-x-4">
-              <!-- <Draggable
+              <Draggable
                 v-model="cardsLists"
                 group="cardsLists"
-                class="space-y-3"
+                class="space-x-4 horizontal"
                 itemKey="id"
                 drag-class="drag"
                 ghost-class="ghost"
@@ -30,9 +30,9 @@
                   <CardsList :cardsList="element"></CardsList>
                 </template>
               </Draggable>
-              <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm> -->
-              <CardsList v-for="list in cardsLists" :key="list.id" :cardsList="list"></CardsList>
               <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm>
+              <!-- <CardsList v-for="list in cardsLists" :key="list.id" :cardsList="list"></CardsList>
+              <CreateListForm :board="currentBoard" @createList="createList"></CreateListForm> -->
             </div>
           </div>
         </div>
@@ -92,3 +92,13 @@ export default {
   name: 'MainBoard'
 }
 </script>
+
+<style scoped>
+.horizontal {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  align-items: flex-start;
+}
+</style>
