@@ -24,7 +24,7 @@
     </div>
     <div class="pb-3 flex flex-col overflow-hidden">
       <div class="px-3 overflow-y-auto">
-        <draggable
+        <Draggable
           v-model="currentList.cards"
           group="cards"
           class="space-y-3"
@@ -38,7 +38,7 @@
           <template #item="{ element }">
             <CardItem :card="element" @changeCard="changeCard"></CardItem>
           </template>
-        </draggable>
+        </Draggable>
         <!-- <ul class="space-y-3">
           <CardItem
             v-for="card in cardsList.cards"
@@ -61,16 +61,10 @@
 import DropDownMenu from '@/components/UI/DropDownMenu.vue'
 import CreateCardForm from '@/components/CreateCardForm.vue'
 import CardItem from '@/components/CardItem.vue'
-import {
-  AdjustmentsHorizontalIcon,
-  EllipsisHorizontalIcon,
-  PlusIcon
-} from '@heroicons/vue/20/solid'
 import { ref, watch } from 'vue'
 import type { Ref } from 'vue'
 import { MenuItem } from '@headlessui/vue'
 import type { UserSpace } from '@/types/index'
-import draggable from 'vuedraggable'
 const props = defineProps<{ cardsList: UserSpace.CardsList }>()
 const currentList: Ref<UserSpace.CardsList> = ref({ ...props.cardsList })
 // const cards: Ref<UserSpace.Card[]> = ref([...currentList.value.cards])
